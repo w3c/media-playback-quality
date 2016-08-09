@@ -68,15 +68,6 @@
     <section>
       <h2>Concepts</h2>
 
-      <p>
-        The <dfn>displayed frame delay</dfn> is the delay between a frame's
-        presentation time and the actual time it was displayed, in
-        double-precision value in seconds and rounded to the nearest display
-        refresh interval. This delay MUST be greater than or equal to zero since
-        frames MUST never be displayed before their presentation time. Non-zero
-        delays are sign of playback jitter and possible loss of A/V sync.
-      </p>
-
       <p>Each <a>HTMLVideoElement</a> MUST maintain a <dfn>total video frame
       count</dfn> variable keeping track of the total number of frames that have
       been displayed and dropped. It MUST follow these rules:
@@ -112,18 +103,6 @@
           invoked.</li>
           <li>It is incremented when a corrupted video frame is detected by the
           decoder.</li>
-        </ul>
-      </p>
-
-      <p>Each <a>HTMLVideoElement</a> MUST maintain a <dfn>displayed frame delay
-        sum</dfn> variable keeping track of the sum of all <a data-lt='displayed frame delay'>displayed frame
-      delays</a>. It MUST follow these rules:
-        <ul>
-          <li>It is initialized to 0 when the element is created.</li>
-          <li>It is reset to 0 when the <a>media element load algorithm</a> is
-          invoked.</li>
-          <li>When a frame is displayed, its <a>displayed frame delay</a> is
-          computed and added to this variable.</li>
         </ul>
       </p>
 
