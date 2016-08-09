@@ -158,8 +158,6 @@
           to the current value of the <a>dropped video frame count</a>.</li>
           <li>Set <var>playbackQuality</var>.<a for='VideoPlaybackQuality'>corruptedVideoFrames</a>
           to the current value of the <a>corrupted video frame count</a>.
-          <li>Set <var>playbackQuality</var>.<a for='VideoPlaybackQuality'>totalFrameDelay</a>
-          to the current value of the <a>displayed frame delay sum</a>.
           <li>Return <var>playbackQuality</var>.</li>
         </ol>
       </p>
@@ -173,7 +171,6 @@
           readonly attribute DOMHighResTimeStamp creationTime;
           readonly attribute unsigned long corruptedVideoFrames;
           readonly attribute unsigned long droppedVideoFrames;
-          readonly attribute double totalFrameDelay;
           readonly attribute unsigned long totalVideoFrames;
         };
       </pre>
@@ -193,13 +190,6 @@
         The <a for='VideoPlaybackQuality'>droppedVideoFrames</a> attribute MUST
         return the total number of frames dropped predecode or dropped because
         the frame missed its display deadline.
-      </p>
-
-      <p>
-        The <a for='VideoPlaybackQuality'>totalFrameDelay</a> attribute MUST
-        return the sum of all <a data-lt='displayed frame delay'>displayed frame delays</a> for all displayed
-        frames. In other words, frames include in the <a for='VideoPlaybackQuality'>totalVideoFrames</a>
-        count, but not in the <a for='VideoPlaybackQuality'>droppedVideoFrames</a> one.
       </p>
 
       <p>
