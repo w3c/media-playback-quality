@@ -3,13 +3,12 @@
   <head>
     <meta charset='UTF-8'>
     <title>Media Playback Quality</title>
-    <script src="https://www.w3.org/Tools/respec/respec-w3c-common" async
+    <script src="https://www.w3.org/Tools/respec/respec-w3c" async
     class='remove'>
     </script>
     <script class='remove'>
       var respecConfig = {
         specStatus: 'CG-DRAFT',
-        edDraftURI: 'https://wicg.github.io/media-playback-quality/',
         shortName:  'media-playback-quality',
         editors: [
           {
@@ -22,47 +21,23 @@
         // previousPublishDate: '2015-11-02',
         wg: 'Web Incubator Community Group',
         wgURI: 'https://wicg.io',
-        wgPublicList: "public-wicg",
         wgPatentURI: '',
-        issueBase: '',
-        githubAPI: '',
+        github: 'wicg/media-playback-quality/',
+        xref: "web-platform",
       };
     </script>
   </head>
-  <body>
+  <body data-cite="hr-time">
     <section id='abstract'>
-      This specification extends the <code><a>HTMLVideoElement</a></code> to add
+      This specification extends {{HTMLVideoElement}} to add
       new features that can be used to detect the user perceived playback
       quality.
     </section>
 
     <section id='sotd'>
-      This document is extracted from the [[media-source]] specification in
+      <p>This document is extracted from the [[media-source]] specification in
       order to work on the playback quality problematic in a larger scope. It is
-      a proposal for a <a href='https://www.w3.org/community/wicg/'>Web Incubator Community Group</a> specification.
-    </section>
-
-    <section id='conformance'>
-    </section>
-
-    <section>
-      <h2>Dependencies</h2>
-
-      <p>
-        The following concepts and interfaces are defined in [[!HTML]]:
-        <ul>
-          <li><code><a href='https://html.spec.whatwg.org/multipage/embedded-content.html#htmlvideoelement'><dfn>HTMLVideoElement</dfn></a></code></li>
-          <li><a href='https://html.spec.whatwg.org/multipage/embedded-content.html#media-element-load-algorithm'><dfn>media element load algorithm</dfn></a>
-        </ul>
-      </p>
-
-      <p>
-        The following concepts and interfaces are defined in [[!hr-time]]:
-        <ul>
-          <li><code><a href='https://w3c.github.io/hr-time/#idl-def-domhighrestimestamp'><dfn>DOMHighResTimeStamp</dfn></a></code></li>
-          <li><code><a href='https://w3c.github.io/hr-time/#dom-performance-now'><dfn>Performance.now()</dfn></a></code></li>
-        </ul>
-      </p>
+      a proposal for a <a href='https://www.w3.org/community/wicg/'>Web Incubator Community Group</a> specification.</p>
     </section>
 
     <section>
@@ -114,8 +89,8 @@
       </p>
     </section>
 
-    <section>
-      <h2>Extension to  the <code><a>HTMLVideoElement</a></code></h2>
+    <section data-dfn-for="HTMLVideoElement">
+      <h2>Extension to the {{HTMLVideoElement}} interface</h2>
 
       <pre class='idl'>
         partial interface HTMLVideoElement {
@@ -124,26 +99,26 @@
       </pre>
 
       <p>
-        When <a for='HTMLVideoElement' data-lt='getVideoPlaybackQuality'>getVideoPlaybackQuality()</a> method is
+        When <dfn>getVideoPlaybackQuality()</dfn> method is
         called, the user agent MUST run the following steps:
-        <ol>
-          <li>Let <var>playbackQuality</var> be a new instance of
+        <ol data-link-for="VideoPlaybackQuality">
+          <li>Let <var data-type="VideoPlaybackQuality">playbackQuality</var> be a new instance of
           <a>VideoPlaybackQuality</a>.</li>
-          <li>Set <var>playbackQuality</var>.<a for='VideoPlaybackQuality'>creationTime</a>
-          to the value returned by a call to <code><a>Performance.now()</a></code>.
-          <li>Set <var>playbackQuality</var>.<a for='VideoPlaybackQuality'>totalVideoFrames</a>
+          <li>Set <var>playbackQuality</var>.<a>creationTime</a>
+          to the <a>current high resolution time</a>.
+          <li>Set <var>playbackQuality</var>.<a>totalVideoFrames</a>
           to the current value of the <a>total video frame count</a>.</li>
-          <li>Set <var>playbackQuality</var>.<a for='VideoPlaybackQuality'>droppedVideoFrames</a>
+          <li>Set <var>playbackQuality</var>.<a>droppedVideoFrames</a>
           to the current value of the <a>dropped video frame count</a>.</li>
-          <li>Set <var>playbackQuality</var>.<a for='VideoPlaybackQuality'>corruptedVideoFrames</a>
+          <li>Set <var>playbackQuality</var>.<a>corruptedVideoFrames</a>
           to the current value of the <a>corrupted video frame count</a>.
           <li>Return <var>playbackQuality</var>.</li>
         </ol>
       </p>
     </section>
 
-    <section>
-      <h2><code><a>VideoPlaybackQuality</a></code> interface</h2>
+    <section data-dfn-for="VideoPlaybackQuality">
+      <h2>`VideoPlaybackQuality` interface</h2>
 
       <pre class='idl'>
         interface VideoPlaybackQuality {
@@ -155,27 +130,27 @@
       </pre>
 
       <p>
-        The <a for='VideoPlaybackQuality'>creationTime</a> attribute MUST return
-        the timestamp returned by <code><a>Performance.now()</a></code> when the
-        object was created.
+        The <dfn>creationTime</dfn> attribute MUST return the <a>current high resolution time</a> for when object was created.
       </p>
 
       <p>
-        The <a for='VideoPlaybackQuality'>corruptedVideoFrames</a> attribute MUST
+        The <dfn>corruptedVideoFrames</dfn> attribute MUST
         return the total number of corrupted frames that have been detected.
       </p>
 
       <p>
-        The <a for='VideoPlaybackQuality'>droppedVideoFrames</a> attribute MUST
+        The <dfn>droppedVideoFrames</dfn> attribute MUST
         return the total number of frames dropped predecode or dropped because
         the frame missed its display deadline.
       </p>
 
       <p>
-        The <a for='VideoPlaybackQuality'>totalVideoFrames</a> attribute MUST
+        The <dfn>totalVideoFrames</dfn> attribute MUST
         return the total number of frames that would have been displayed if no
         frames are dropped.
       </p>
+    </section>
+    <section id='conformance'>
     </section>
   </body>
 </html>
