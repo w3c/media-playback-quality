@@ -70,6 +70,32 @@
           it missed a display deadline.</li>
         </ul>
       </p>
+
+      <p class='note'>
+        The following <a>corrupted video frame count</a> concept and associated
+        interfaces are deprecated. They may or may not be present in current
+        implementations.
+      </p>
+
+      <p>Each <a>HTMLVideoElement</a> MUST maintain a
+      <dfn>corrupted video frame count</dfn> variable keeping track of the total
+      number of corrupted frames detected. It MUST follow these rules:
+        <ul>
+          <li>It is initialized to 0 when the element is created.</li>
+          <li>It is reset to 0 when the
+            <a data-cite="html/media.html#media-element-load-algorithm">media element load algorithm</a> is
+          invoked.</li>
+          <li>It is incremented when a corrupted video frame is detected by the
+          decoder.</li>
+        </ul>
+      </p>
+
+      <p>
+        It is up to the implementation to determine whether to display or drop a
+        corrupted frame. However, regardless of the choice made, the <a>total
+        video frame count</a> and <a>dropped video frame count</a> MUST be
+        updated appropriately.
+      </p>
     </section>
 
     <section data-dfn-for="HTMLVideoElement">
@@ -85,14 +111,17 @@
         When <dfn>getVideoPlaybackQuality()</dfn> method is
         called, the user agent MUST run the following steps:
         <ol data-link-for="VideoPlaybackQuality">
-          <li>Let <var data-type="VideoPlaybackQuality">playbackQuality</var> be a new instance of
-          <a>VideoPlaybackQuality</a>.</li>
+          <li>Let <var data-type="VideoPlaybackQuality">playbackQuality</var>
+          be a new instance of <a>VideoPlaybackQuality</a>.</li>
           <li>Set <var>playbackQuality</var>.<a>creationTime</a>
           to the <a>current high resolution time</a>.
           <li>Set <var>playbackQuality</var>.<a>totalVideoFrames</a>
           to the current value of the <a>total video frame count</a>.</li>
           <li>Set <var>playbackQuality</var>.<a>droppedVideoFrames</a>
           to the current value of the <a>dropped video frame count</a>.</li>
+          <li><b>[DEPRECATED]</b> Set
+          <var>playbackQuality</var>.<a>corruptedVideoFrames</a>
+          to the current value of the <a>corrupted video frame count</a>.
           <li>Return <var>playbackQuality</var>.</li>
         </ol>
       </p>
@@ -107,11 +136,15 @@
           readonly attribute DOMHighResTimeStamp creationTime;
           readonly attribute unsigned long droppedVideoFrames;
           readonly attribute unsigned long totalVideoFrames;
+
+          // Deprecated!
+          readonly attribute unsigned long corruptedVideoFrames;
         };
       </pre>
 
       <p>
-        The <dfn>creationTime</dfn> attribute MUST return the <a>current high resolution time</a> for when object was created.
+        The <dfn>creationTime</dfn> attribute MUST return the <a>current high
+        resolution time</a> for when object was created.
       </p>
 
       <p>
@@ -124,6 +157,12 @@
         The <dfn>totalVideoFrames</dfn> attribute MUST
         return the total number of frames that would have been displayed if no
         frames are dropped.
+      </p>
+
+      <p>
+        <b>[DEPRECATED]</b>
+        The <dfn data-lt="foo">corruptedVideoFrames</dfn> attribute MUST
+        return the total number of corrupted frames that have been detected.
       </p>
     </section>
     <section id='conformance'>
