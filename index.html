@@ -24,10 +24,7 @@
         ],
         // previousMaturity: 'WD',
         // previousPublishDate: '2015-11-02',
-        wg: 'Media Working Group',
-        wgURI: 'https://www.w3.org/media-wg/',
-        wgPatentURI: 'https://www.w3.org/2004/01/pp-impl/115198/status',
-        wgPublicList: 'public-media-wg',
+        group: 'media',
         github: 'w3c/media-playback-quality/',
         xref: "web-platform",
       };
@@ -48,7 +45,7 @@
     <section>
       <h2>Concepts</h2>
 
-      <p>Each <a>HTMLVideoElement</a> MUST maintain a <dfn>total video frame
+      <p>Each {{HTMLVideoElement}} MUST maintain a <dfn>total video frame
       count</dfn> variable keeping track of the total number of frames that have
       been displayed and dropped. It MUST follow these rules:
         <ul>
@@ -62,7 +59,7 @@
         </ul>
       </p>
 
-      <p>Each <a>HTMLVideoElement</a> MUST maintain a <dfn>dropped video frame
+      <p>Each {{HTMLVideoElement}} MUST maintain a <dfn>dropped video frame
       count</dfn> variable keeping track of the total number of frames that have
       been dropped. It MUST follow these rules:
         <ul>
@@ -82,7 +79,7 @@
         implementations.
       </p>
 
-      <p>Each <a>HTMLVideoElement</a> MUST maintain a
+      <p>Each {{HTMLVideoElement}} MUST maintain a
       <dfn>corrupted video frame count</dfn> variable keeping track of the total
       number of corrupted frames detected. It MUST follow these rules:
         <ul>
