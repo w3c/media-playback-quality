@@ -45,7 +45,7 @@
     <section>
       <h2>Concepts</h2>
 
-      <p>Each {{HTMLVideoElement}} MUST maintain a <dfn>total video frame
+      <p>Each {{HTMLVideoElement}} maintains a <dfn>total video frame
       count</dfn> variable keeping track of the total number of frames that have
       been displayed and dropped. It MUST follow these rules:
         <ul>
@@ -59,7 +59,7 @@
         </ul>
       </p>
 
-      <p>Each {{HTMLVideoElement}} MUST maintain a <dfn>dropped video frame
+      <p>Each {{HTMLVideoElement}} maintains a <dfn>dropped video frame
       count</dfn> variable keeping track of the total number of frames that have
       been dropped. It MUST follow these rules:
         <ul>
@@ -67,7 +67,7 @@
           <li>It is reset to 0 when the
             <a data-cite="html/media.html#media-element-load-algorithm">media element load algorithm</a> is
           invoked.</li>
-          <li>It is incremented when a video frame is dropped predecode.</li>
+          <li>It is incremented when a video frame is dropped pre-decode.</li>
           <li>It is incremented when a video frame is decoded but dropped because
           it missed a display deadline.</li>
         </ul>
@@ -121,7 +121,7 @@
           to the current value of the <a>total video frame count</a>.</li>
           <li>Set <var>playbackQuality</var>.<a>droppedVideoFrames</a>
           to the current value of the <a>dropped video frame count</a>.</li>
-          <li><b>[DEPRECATED]</b> Set
+          <li>Set
           <var>playbackQuality</var>.<a>corruptedVideoFrames</a>
           to the current value of the <a>corrupted video frame count</a>.
           <li>Return <var>playbackQuality</var>.</li>
@@ -138,33 +138,30 @@
           readonly attribute DOMHighResTimeStamp creationTime;
           readonly attribute unsigned long droppedVideoFrames;
           readonly attribute unsigned long totalVideoFrames;
-
-          // Deprecated!
           readonly attribute unsigned long corruptedVideoFrames;
         };
       </pre>
 
       <p>
-        The <dfn>creationTime</dfn> attribute MUST return the <a>current high
-        resolution time</a> for when object was created.
+        The <dfn>creationTime</dfn> attribute represents the <a>current high
+        resolution time</a> for when [=this=] instance was created.
       </p>
 
       <p>
-        The <dfn>droppedVideoFrames</dfn> attribute MUST
-        return the total number of frames dropped predecode or dropped because
+        The <dfn>droppedVideoFrames</dfn> attribute
+        represents the total number of frames dropped pre-decode or dropped because
         the frame missed its display deadline.
       </p>
 
       <p>
-        The <dfn>totalVideoFrames</dfn> attribute MUST
-        return the total number of frames that would have been displayed if no
+        The <dfn>totalVideoFrames</dfn> attribute
+        represents the total number of frames that would have been displayed if no
         frames are dropped.
       </p>
 
       <p>
-        <b>[DEPRECATED]</b>
-        The <dfn data-lt="foo">corruptedVideoFrames</dfn> attribute MUST
-        return the total number of corrupted frames that have been detected.
+        The <dfn>corruptedVideoFrames</dfn> attribute
+        represents the total number of corrupted frames that have been detected.
       </p>
     </section>
     <section id='conformance'>
